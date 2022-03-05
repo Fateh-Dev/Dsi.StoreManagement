@@ -1,15 +1,10 @@
 using System;
-using Dsi.StoreManagement.Categories;
-using Dsi.StoreManagement.Colors;
-using Dsi.StoreManagement.Marques;
 using Dsi.StoreManagement.Operations;
-using Dsi.StoreManagement.Models;
-using Volo.Abp.Domain.Entities.Auditing;
-using System.Collections.Generic;
+using Volo.Abp.Application.Dtos;
 
 namespace Dsi.StoreManagement.Documents
 {
-    public class Document : FullAuditedAggregateRoot<Guid>
+    public class DocumentDto : AuditedEntityDto<Guid>
     {
         public string DisplayFr { get; set; }
         public string DisplayAr { get; set; }
@@ -18,8 +13,6 @@ namespace Dsi.StoreManagement.Documents
         public DateTime DocumentDate { get; set; }
         public DocumentType DocumentType { get; set; }
         public OperationType OperationType { get; set; }
-        public virtual ICollection<Operation> ProductList { get; set; }
-
         // Public Service Owner {get;set;}
         // Public Guid OwnerId {get;set;}
         // Public Service Source {get;set;}

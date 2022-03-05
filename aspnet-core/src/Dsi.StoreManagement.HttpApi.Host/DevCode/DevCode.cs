@@ -39,27 +39,6 @@ public static class DevCodeExtension
                                 };
     public static HashSet<string> ApiExplorerGroupes = new HashSet<string>(){
             "All",
-            "v1",
-            "docs",
-            "Default",
-            "FREETIMECore",
-            "FREETIMEHttp",
-            "Account",
-            "Test",
-            "FakeApi",
-            "App","Notification",
-            "AbpEnums",
-            "AbpApiDefinition",
-            "Permissions",
-            "Tenant",
-            "AbpApplicationConfiguration",
-            "AbpTenant",
-            "IdentityRole",
-            "IdentityUser",
-            "IdentityUserLookup",
-            "Features",
-            "Profile",
-            "FREETIMEAdmin"
         };
     public static void ConfigureDevCode(this IServiceCollection service)
     {
@@ -114,74 +93,62 @@ public static class DevCodeExtension
 
     private static void ConfigureSwaggerServices(this IServiceCollection service)
     {
-
-        // services.AddAbpSwaggerGenWithOAuth(
-        //                configuration["AuthServer:Authority"],
-        //                new Dictionary<string, string>
-        //                {
-        //         {"IDS_CLIENT", "IDS_CLIENT API"}
-        //                },
-        //                options =>
-        //                {
-        //                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "FREETIME API", Version = "v1" });
-        //                    options.DocInclusionPredicate((docName, description) => true);
-        //                });
         service.AddSwaggerGen(
-            options =>
-            {
+                  options =>
+                  {
 
-                options.OperationFilter<HttpHeaderOperationFilter>();
+                      options.OperationFilter<HttpHeaderOperationFilter>();
 
-                foreach (var item in ApiExplorerGroupes.OrderBy(k => k.ToLower()))
-                {
+                      foreach (var item in ApiExplorerGroupes.OrderBy(k => k.ToLower()))
+                      {
 
-                    options.SwaggerDoc(item, new OpenApiInfo
-                    {
-                        Title = "" + item,
-                        Version = "1.0.0",
-                        Description = "" + item
-                    });
-                }
+                          options.SwaggerDoc(item, new OpenApiInfo
+                          {
+                              Title = "" + item,
+                              Version = "1.0.0",
+                              Description = "" + item
+                          });
+                      }
 
-                options.DocInclusionPredicate((docName, description) =>
-                {
-                    var nm = description.ActionDescriptor.ToString().ToLower();
-                    var groupName = description.GroupName;
-                    if (groupName == "AbpApiDefinition") return false;
-                    if (docName == "docs")
-                    {
+                      options.DocInclusionPredicate((docName, description) =>
+                      {
+                          var nm = description.ActionDescriptor.ToString().ToLower();
+                          var groupName = description.GroupName;
+                          if (groupName == "AbpApiDefinition") return false;
+                          if (docName == "docs")
+                          {
 
-                        if (hsIgnoredDocs.Contains(groupName)) return false;
+                              if (hsIgnoredDocs.Contains(groupName)) return false;
 
-                        return true;
-                    }
-                    if (docName == "All" || docName == "v1") return true;
-                    if (string.IsNullOrWhiteSpace(description.GroupName))
-                    {
-                        var attribute = description.ActionDescriptor.EndpointMetadata.OfType<ApiExplorerSettingsAttribute>().FirstOrDefault();
-                        if (attribute != null)
-                        {
-                            groupName = attribute.GroupName;
-                        }
-                    }
-                    if (docName == "Default")
-                    {
-                        return string.IsNullOrWhiteSpace(groupName) || groupName == "Default";
-                    }
-                    if (!string.IsNullOrWhiteSpace(groupName))
-                    {
-                        if (!ApiExplorerGroupes.Contains(groupName))
-                        {
-                            System.Console.WriteLine(groupName);
-                        }
-                        if (groupName == docName) return true;
-                    }
+                              return true;
+                          }
+                          if (docName == "All" || docName == "v1") return true;
+                          if (string.IsNullOrWhiteSpace(description.GroupName))
+                          {
+                              var attribute = description.ActionDescriptor.EndpointMetadata.OfType<ApiExplorerSettingsAttribute>().FirstOrDefault();
+                              if (attribute != null)
+                              {
+                                  groupName = attribute.GroupName;
+                              }
+                          }
+                          if (docName == "Default")
+                          {
+                              return string.IsNullOrWhiteSpace(groupName) || groupName == "Default";
+                          }
+                          if (!string.IsNullOrWhiteSpace(groupName))
+                          {
+                              if (!ApiExplorerGroupes.Contains(groupName))
+                              {
+                                  System.Console.WriteLine(groupName);
+                              }
+                              if (groupName == docName) return true;
+                          }
 
-                    return false;
-                });
+                          return false;
+                      });
 
 
-            });
+                  });
     }
 
 }

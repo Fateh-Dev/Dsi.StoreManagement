@@ -36,7 +36,6 @@ public class StoreManagementEntityFrameworkCoreModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
         context.Services.AddAbpDbContext<StoreManagementDbContext>(options =>
         {
             /* Remove "includeAllEntities: true" to create

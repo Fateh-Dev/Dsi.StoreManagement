@@ -3,6 +3,7 @@ using System;
 using Dsi.StoreManagement.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,10 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Dsi.StoreManagement.Migrations
 {
     [DbContext(typeof(StoreManagementDbContext))]
-    partial class StoreManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220304224358_create_Store_DB")]
+    partial class create_Store_DB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

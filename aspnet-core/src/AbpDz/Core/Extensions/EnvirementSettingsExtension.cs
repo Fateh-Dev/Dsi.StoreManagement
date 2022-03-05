@@ -34,7 +34,7 @@ namespace System
             return null;
 
         }
-        public static void SetHostEvirementSettings(this IConfiguration _appConfiguration, string appName = "FREETIME")
+        public static void SetHostEvirementSettings(this IConfiguration _appConfiguration, string appName = "Dsi.StoreManagement")
         {
             var cs = CollectionString();
             if (!string.IsNullOrWhiteSpace(cs))

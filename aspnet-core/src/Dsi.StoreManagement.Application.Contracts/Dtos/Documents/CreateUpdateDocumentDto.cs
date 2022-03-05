@@ -4,21 +4,27 @@ using Dsi.StoreManagement.Colors;
 using Dsi.StoreManagement.Marques;
 using Dsi.StoreManagement.Operations;
 using Dsi.StoreManagement.Models;
-using Volo.Abp.Domain.Entities.Auditing;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dsi.StoreManagement.Documents
 {
-    public class Document : FullAuditedAggregateRoot<Guid>
+    public class CreateUpdateDocumentDto
     {
+        [StringLength(128)]
         public string DisplayFr { get; set; }
         public string DisplayAr { get; set; }
+        [StringLength(128)]
         public string Description { get; set; }
+        [Required]
         public string DocumentReference { get; set; }
-        public DateTime DocumentDate { get; set; }
-        public DocumentType DocumentType { get; set; }
-        public OperationType OperationType { get; set; }
-        public virtual ICollection<Operation> ProductList { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DocumentDate { get; set; } = DateTime.Now;
+        [Required]
+        public DocumentType DocumentType { get; set; } = DocumentType.Undefined;
+        [Required]
+        public OperationType OperationType { get; set; } = OperationType.Undefined;
 
         // Public Service Owner {get;set;}
         // Public Guid OwnerId {get;set;}
