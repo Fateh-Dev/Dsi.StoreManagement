@@ -10,15 +10,13 @@ namespace Dsi.StoreManagement.Documents
         public string DisplayAr { get; set; }
         public string Description { get; set; }
         public string DocumentReference { get; set; }
+        public bool isValid { get; set; }
         public DateTime DocumentDate { get; set; }
         public DocumentType DocumentType { get; set; }
         public OperationType OperationType { get; set; }
-        // Public Service Owner {get;set;}
-        // Public Guid OwnerId {get;set;}
-        // Public Service Source {get;set;}
-        // Public Guid SourceId {get;set;}
-        // Public Service Destination {get;set;}
-        // Public Guid DestinationId {get;set;}
+        public Guid? OwnerId { get; set; }
+        public Guid? SourceId { get; set; }
+        public Guid? DestinationId { get; set; }
 
     }
 }

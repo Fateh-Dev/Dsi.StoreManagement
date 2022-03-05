@@ -12,21 +12,21 @@ namespace Dsi.StoreManagement.Products
 {
     public class CreateUpdateProductDto
     {
-       
+
         [StringLength(128)]
-        public string DisplayFr { get; set; }
+        public string SerialNumber { get; set; }
         [StringLength(128)]
-        public string DisplayAr { get; set; }
+        public string Reference { get; set; }
         public ProductStatus Status { get; set; } = ProductStatus.Undefined;
         [StringLength(128)]
         public string Description { get; set; }
         public int Quantity { get; set; } = 1;
-        public ProductConsummation ProductConsummation { get; set; } = ProductConsummation.Undefined;
-        public Guid CategoryId { get; set; }
-        public Guid ModelId { get; set; }
-        public Guid MarqueId { get; set; }
-        public Guid UnitId { get; set; }
-        public Guid ColorId { get; set; }
+        public ProductConsommation ProductConsummation { get; set; } = ProductConsommation.Undefined;
+        public Guid? CategoryId { get; set; }
+        public Guid? ModelId { get; set; }
+        public Guid? MarqueId { get; set; }
+        public Guid? UnitId { get; set; }
+        public Guid? ColorId { get; set; }
 
         // Public Guid ActualPositionId {get;set;}
         // Public Service ActualPosition {get;set;}

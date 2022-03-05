@@ -6,6 +6,7 @@ using Dsi.StoreManagement.Marques;
 using Dsi.StoreManagement.Models;
 using Dsi.StoreManagement.Operations;
 using Dsi.StoreManagement.Products;
+using Dsi.StoreManagement.StructuresOrServices;
 using Dsi.StoreManagement.Units;
 
 namespace Dsi.StoreManagement;
@@ -33,5 +34,7 @@ public class StoreManagementApplicationAutoMapperProfile : Profile
         CreateMap<CreateUpdateUnitDto, Unit>();
         CreateMap<Color, ColorDto>();
         CreateMap<CreateUpdateColorDto, Color>();
+        CreateMap<StructureOrService, StructureOrServiceDto>();
+        CreateMap<CreateUpdateStructureOrServiceDto, StructureOrService>();
     }
 }

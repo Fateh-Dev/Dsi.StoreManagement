@@ -4,7 +4,7 @@
 
 namespace Dsi.StoreManagement.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class fix_required : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -18,20 +18,17 @@ namespace Dsi.StoreManagement.Documents
         public string Description { get; set; }
         [Required]
         public string DocumentReference { get; set; }
+        public bool isValid { get; set; } = false;
         [Required]
         [DataType(DataType.Date)]
-        public DateTime DocumentDate { get; set; } = DateTime.Now;
+        public DateTime DocumentDate { get; set; } = DateTime.Now.Date;
         [Required]
         public DocumentType DocumentType { get; set; } = DocumentType.Undefined;
         [Required]
         public OperationType OperationType { get; set; } = OperationType.Undefined;
-
-        // Public Service Owner {get;set;}
-        // Public Guid OwnerId {get;set;}
-        // Public Service Source {get;set;}
-        // Public Guid SourceId {get;set;}
-        // Public Service Destination {get;set;}
-        // Public Guid DestinationId {get;set;}
+        public Guid? OwnerId { get; set; } = null;
+        public Guid? SourceId { get; set; } = null;
+        public Guid? DestinationId { get; set; } = null;
 
     }
 }

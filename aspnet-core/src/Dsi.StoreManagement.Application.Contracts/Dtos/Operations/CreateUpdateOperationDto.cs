@@ -15,6 +15,7 @@ namespace Dsi.StoreManagement.Operations
 
         public string Description { get; set; }
         public int Quantity { get; set; } = 1;
+        public float UnitPrice { get; set; } = 0;
         public Guid ProductId { get; set; }
         public Guid DocumentId { get; set; }
 

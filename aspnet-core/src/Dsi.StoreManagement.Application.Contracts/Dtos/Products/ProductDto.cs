@@ -14,12 +14,12 @@ namespace Dsi.StoreManagement.Products
     public class ProductDto : AuditedEntityDto<Guid>
     {
 
-        public string DisplayFr { get; set; }
-        public string DisplayAr { get; set; }
+        public string SerialNumber { get; set; }
+        public string Reference { get; set; }
         public ProductStatus Status { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
-        public ProductConsummation ProductConsummation { get; set; }
+        public ProductConsommation ProductConsommation { get; set; }
         public Guid CategoryId { get; set; }
         public Guid ModelId { get; set; }
         public Guid MarqueId { get; set; }

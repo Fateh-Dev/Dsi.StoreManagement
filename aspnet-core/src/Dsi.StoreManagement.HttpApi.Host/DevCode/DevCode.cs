@@ -38,7 +38,7 @@ public static class DevCodeExtension
                                 "AbpApplicationConfiguration","Account","Profile" ,"Login","IdentityUser","Tenant","IdentityRole"
                                 };
     public static HashSet<string> ApiExplorerGroupes = new HashSet<string>(){
-            "All",
+            "All","Dsi_Store_Manager"
         };
     public static void ConfigureDevCode(this IServiceCollection service)
     {

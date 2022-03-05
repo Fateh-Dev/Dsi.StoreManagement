@@ -1,6 +1,6 @@
 namespace Dsi.StoreManagement.Products
 {
-    public enum ProductConsummation : byte
+    public enum ProductConsommation : byte
     {
         Undefined,
         Consommable,

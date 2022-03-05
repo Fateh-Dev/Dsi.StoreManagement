@@ -12,6 +12,7 @@ namespace Dsi.StoreManagement.Operations
     public class Operation : FullAuditedAggregateRoot<Guid>
     {
         public string Description { get; set; }
+        public float UnitPrice { get; set; }
         public int Quantity { get; set; }
         public Product Product { get; set; }
         public Guid ProductId { get; set; }

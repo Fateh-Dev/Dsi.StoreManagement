@@ -1,10 +1,12 @@
 using System;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
 namespace Dsi.StoreManagement.Models
 {
+    [ApiExplorerSettings(GroupName = "Dsi_Store_Manager", IgnoreApi = false)]
     public class ModelAppService :
         CrudAppService<
             Model, //The Book entity

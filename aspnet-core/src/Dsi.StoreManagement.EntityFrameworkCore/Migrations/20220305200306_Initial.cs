@@ -277,6 +277,142 @@ namespace Dsi.StoreManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Dsi_Store_Categories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayFr = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DisplayAr = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dsi_Store_Colors",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayFr = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DisplayAr = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Colors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dsi_Store_Marques",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayFr = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DisplayAr = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Marques", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dsi_Store_Models",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayFr = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DisplayAr = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Models", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dsi_Store_StructuresOrServices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayFr = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DisplayAr = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ParentStructureId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_StructuresOrServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_StructuresOrServices_Dsi_Store_StructuresOrServic~",
+                        column: x => x.ParentStructureId,
+                        principalTable: "Dsi_Store_StructuresOrServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dsi_Store_Units",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayFr = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DisplayAr = table.Column<string>(type: "text", nullable: true),
+                    Order = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Units", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "IdentityServerApiResources",
                 columns: table => new
                 {
@@ -694,6 +830,130 @@ namespace Dsi.StoreManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Dsi_Store_Documents",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DisplayFr = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DisplayAr = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    isValid = table.Column<bool>(type: "boolean", nullable: false),
+                    DocumentReference = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    DocumentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DocumentType = table.Column<byte>(type: "smallint", nullable: false),
+                    OperationType = table.Column<byte>(type: "smallint", nullable: false),
+                    OwnerId = table.Column<Guid>(type: "uuid", nullable: true),
+                    SourceId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DestinationId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Documents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Documents_Dsi_Store_StructuresOrServices_Destinat~",
+                        column: x => x.DestinationId,
+                        principalTable: "Dsi_Store_StructuresOrServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Documents_Dsi_Store_StructuresOrServices_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Dsi_Store_StructuresOrServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Documents_Dsi_Store_StructuresOrServices_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "Dsi_Store_StructuresOrServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dsi_Store_Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    SerialNumber = table.Column<string>(type: "text", nullable: true),
+                    Reference = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<byte>(type: "smallint", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    ProductConsommation = table.Column<byte>(type: "smallint", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ModelId = table.Column<Guid>(type: "uuid", nullable: true),
+                    MarqueId = table.Column<Guid>(type: "uuid", nullable: true),
+                    UnitId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ColorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ActualPositionId = table.Column<Guid>(type: "uuid", nullable: true),
+                    OldPositionId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Products_Dsi_Store_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Dsi_Store_Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Products_Dsi_Store_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Dsi_Store_Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Products_Dsi_Store_Marques_MarqueId",
+                        column: x => x.MarqueId,
+                        principalTable: "Dsi_Store_Marques",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Products_Dsi_Store_Models_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "Dsi_Store_Models",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Products_Dsi_Store_StructuresOrServices_ActualPos~",
+                        column: x => x.ActualPositionId,
+                        principalTable: "Dsi_Store_StructuresOrServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Products_Dsi_Store_StructuresOrServices_OldPositi~",
+                        column: x => x.OldPositionId,
+                        principalTable: "Dsi_Store_StructuresOrServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Products_Dsi_Store_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Dsi_Store_Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "IdentityServerApiResourceClaims",
                 columns: table => new
                 {
@@ -1033,6 +1293,43 @@ namespace Dsi.StoreManagement.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Dsi_Store_Operations",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    UnitPrice = table.Column<float>(type: "real", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uuid", maxLength: 128, nullable: false),
+                    DocumentId = table.Column<Guid>(type: "uuid", maxLength: 128, nullable: false),
+                    ExtraProperties = table.Column<string>(type: "text", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uuid", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(type: "uuid", nullable: true),
+                    DeletionTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dsi_Store_Operations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Operations_Dsi_Store_Documents_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "Dsi_Store_Documents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Dsi_Store_Operations_Dsi_Store_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Dsi_Store_Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AbpAuditLogActions_AuditLogId",
                 table: "AbpAuditLogActions",
@@ -1188,6 +1485,101 @@ namespace Dsi.StoreManagement.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Categories_DisplayFr",
+                table: "Dsi_Store_Categories",
+                column: "DisplayFr",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Colors_DisplayFr",
+                table: "Dsi_Store_Colors",
+                column: "DisplayFr",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Documents_DestinationId",
+                table: "Dsi_Store_Documents",
+                column: "DestinationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Documents_OwnerId",
+                table: "Dsi_Store_Documents",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Documents_SourceId",
+                table: "Dsi_Store_Documents",
+                column: "SourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Marques_DisplayFr",
+                table: "Dsi_Store_Marques",
+                column: "DisplayFr",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Models_DisplayFr",
+                table: "Dsi_Store_Models",
+                column: "DisplayFr",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Operations_DocumentId",
+                table: "Dsi_Store_Operations",
+                column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Operations_ProductId",
+                table: "Dsi_Store_Operations",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Products_ActualPositionId",
+                table: "Dsi_Store_Products",
+                column: "ActualPositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Products_CategoryId",
+                table: "Dsi_Store_Products",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Products_ColorId",
+                table: "Dsi_Store_Products",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Products_MarqueId",
+                table: "Dsi_Store_Products",
+                column: "MarqueId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Products_ModelId",
+                table: "Dsi_Store_Products",
+                column: "ModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Products_OldPositionId",
+                table: "Dsi_Store_Products",
+                column: "OldPositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Products_UnitId",
+                table: "Dsi_Store_Products",
+                column: "UnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_StructuresOrServices_ParentStructureId",
+                table: "Dsi_Store_StructuresOrServices",
+                column: "ParentStructureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dsi_Store_Units_DisplayFr",
+                table: "Dsi_Store_Units",
+                column: "DisplayFr",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_IdentityServerClients_ClientId",
                 table: "IdentityServerClients",
                 column: "ClientId");
@@ -1278,6 +1670,9 @@ namespace Dsi.StoreManagement.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Dsi_Store_Operations");
+
+            migrationBuilder.DropTable(
                 name: "IdentityServerApiResourceClaims");
 
             migrationBuilder.DropTable(
@@ -1350,6 +1745,12 @@ namespace Dsi.StoreManagement.Migrations
                 name: "AbpUsers");
 
             migrationBuilder.DropTable(
+                name: "Dsi_Store_Documents");
+
+            migrationBuilder.DropTable(
+                name: "Dsi_Store_Products");
+
+            migrationBuilder.DropTable(
                 name: "IdentityServerApiResources");
 
             migrationBuilder.DropTable(
@@ -1363,6 +1764,24 @@ namespace Dsi.StoreManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "AbpAuditLogs");
+
+            migrationBuilder.DropTable(
+                name: "Dsi_Store_Categories");
+
+            migrationBuilder.DropTable(
+                name: "Dsi_Store_Colors");
+
+            migrationBuilder.DropTable(
+                name: "Dsi_Store_Marques");
+
+            migrationBuilder.DropTable(
+                name: "Dsi_Store_Models");
+
+            migrationBuilder.DropTable(
+                name: "Dsi_Store_StructuresOrServices");
+
+            migrationBuilder.DropTable(
+                name: "Dsi_Store_Units");
         }
     }
 }

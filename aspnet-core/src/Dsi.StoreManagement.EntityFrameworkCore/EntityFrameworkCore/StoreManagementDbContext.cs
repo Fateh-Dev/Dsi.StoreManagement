@@ -4,6 +4,7 @@ using Dsi.StoreManagement.Documents;
 using Dsi.StoreManagement.Marques;
 using Dsi.StoreManagement.Models;
 using Dsi.StoreManagement.Operations;
+using Dsi.StoreManagement.StructuresOrServices;
 using Dsi.StoreManagement.Products;
 using Dsi.StoreManagement.Units;
 using Microsoft.EntityFrameworkCore;
@@ -64,6 +65,7 @@ public class StoreManagementDbContext :
     public DbSet<Color> Colors { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Operation> Operations { get; set; }
+    public DbSet<StructureOrService> StructuresOrServices { get; set; }
 
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
@@ -104,34 +106,38 @@ public class StoreManagementDbContext :
             {
                 b.ToTable(StoreManagementConsts.DbTablePrefix + "Products",
                     StoreManagementConsts.DbSchema);
-                b.ConfigureByConvention(); //auto configure for the base class props
-                b.Property(x => x.DisplayFr).IsRequired().HasMaxLength(128);
-                b.HasIndex(x => x.DisplayFr).IsUnique();
+                b.ConfigureByConvention(); //auto configure for the base class props 
                 b.HasOne(x => x.Marque)
                     .WithMany()
                     .HasForeignKey(x => x.MarqueId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
+                    .OnDelete(DeleteBehavior.Restrict);
                 b.HasOne(x => x.Model)
                     .WithMany()
                     .HasForeignKey(x => x.ModelId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
+                    .OnDelete(DeleteBehavior.Restrict);
                 b.HasOne(x => x.Unit)
                     .WithMany()
                     .HasForeignKey(x => x.UnitId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
+                    .OnDelete(DeleteBehavior.Restrict);
                 b.HasOne(x => x.Color)
                     .WithMany()
                     .HasForeignKey(x => x.ColorId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
+                    .OnDelete(DeleteBehavior.Restrict);
                 b.HasOne(x => x.Category)
                     .WithMany()
                     .HasForeignKey(x => x.CategoryId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .IsRequired();
+                    .OnDelete(DeleteBehavior.Restrict);
+                b.HasOne(x => x.ActualPosition)
+                    .WithMany()
+                    .HasForeignKey(x => x.ActualPositionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                b.HasOne(x => x.OldPosition)
+                    .WithMany()
+                    .HasForeignKey(x => x.OldPositionId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasIndex(x => x.ActualPositionId);
+                b.HasOne(k => k.ActualPosition).WithMany(k => k.ProductList).HasForeignKey(k => k.ActualPositionId);
 
             });
         builder.Entity<Document>(b =>
@@ -141,6 +147,33 @@ public class StoreManagementDbContext :
                 b.ConfigureByConvention(); //auto configure for the base class props
                 b.Property(x => x.DisplayFr).IsRequired().HasMaxLength(128);
                 b.Property(x => x.DocumentReference).IsRequired().HasMaxLength(128);
+                b.HasOne(x => x.Owner)
+                    .WithMany()
+                    .HasForeignKey(x => x.OwnerId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                b.HasOne(x => x.Source)
+                    .WithMany()
+                    .HasForeignKey(x => x.SourceId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                b.HasOne(x => x.Destination)
+                    .WithMany()
+                    .HasForeignKey(x => x.DestinationId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasIndex(x => x.DestinationId);
+                b.HasOne(k => k.Destination).WithMany(k => k.DocumentList).HasForeignKey(k => k.DestinationId);
+
+            });
+        builder.Entity<StructureOrService>(b =>
+            {
+                b.ToTable(StoreManagementConsts.DbTablePrefix + "StructuresOrServices",
+                    StoreManagementConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props
+                b.Property(x => x.DisplayFr).IsRequired().HasMaxLength(128);
+                b.HasOne(x => x.ParentStructure)
+                    .WithMany()
+                    .HasForeignKey(x => x.ParentStructureId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         builder.Entity<Marque>(b =>
             {

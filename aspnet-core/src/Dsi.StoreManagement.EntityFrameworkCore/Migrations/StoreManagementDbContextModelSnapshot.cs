@@ -160,6 +160,9 @@ namespace Dsi.StoreManagement.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("DestinationId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("DisplayAr")
                         .HasColumnType("text");
 
@@ -200,7 +203,22 @@ namespace Dsi.StoreManagement.Migrations
                     b.Property<byte>("OperationType")
                         .HasColumnType("smallint");
 
+                    b.Property<Guid?>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SourceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("isValid")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("DestinationId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("SourceId");
 
                     b.ToTable("Dsi_Store_Documents", (string)null);
                 });
@@ -370,6 +388,9 @@ namespace Dsi.StoreManagement.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
+                    b.Property<float>("UnitPrice")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DocumentId");
@@ -384,10 +405,107 @@ namespace Dsi.StoreManagement.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CategoryId")
+                    b.Property<Guid?>("ActualPositionId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ColorId")
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ColorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ExtraProperties")
+                        .HasColumnType("text")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("MarqueId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ModelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("OldPositionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<byte>("ProductConsommation")
+                        .HasColumnType("smallint");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("text");
+
+                    b.Property<byte>("Status")
+                        .HasColumnType("smallint");
+
+                    b.Property<Guid?>("UnitId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActualPositionId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("MarqueId");
+
+                    b.HasIndex("ModelId");
+
+                    b.HasIndex("OldPositionId");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("Dsi_Store_Products", (string)null);
+                });
+
+            modelBuilder.Entity("Dsi.StoreManagement.StructuresOrServices.StructureOrService", b =>
+                {
+                    b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -441,40 +559,17 @@ namespace Dsi.StoreManagement.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<Guid>("MarqueId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ModelId")
-                        .HasColumnType("uuid");
-
-                    b.Property<byte>("ProductConsummation")
-                        .HasColumnType("smallint");
-
-                    b.Property<int>("Quantity")
+                    b.Property<int>("Order")
                         .HasColumnType("integer");
 
-                    b.Property<byte>("Status")
-                        .HasColumnType("smallint");
-
-                    b.Property<Guid>("UnitId")
+                    b.Property<Guid?>("ParentStructureId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ParentStructureId");
 
-                    b.HasIndex("ColorId");
-
-                    b.HasIndex("DisplayFr")
-                        .IsUnique();
-
-                    b.HasIndex("MarqueId");
-
-                    b.HasIndex("ModelId");
-
-                    b.HasIndex("UnitId");
-
-                    b.ToTable("Dsi_Store_Products", (string)null);
+                    b.ToTable("Dsi_Store_StructuresOrServices", (string)null);
                 });
 
             modelBuilder.Entity("Dsi.StoreManagement.Units.Unit", b =>
@@ -2454,6 +2549,30 @@ namespace Dsi.StoreManagement.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("Dsi.StoreManagement.Documents.Document", b =>
+                {
+                    b.HasOne("Dsi.StoreManagement.StructuresOrServices.StructureOrService", "Destination")
+                        .WithMany("DocumentList")
+                        .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Dsi.StoreManagement.StructuresOrServices.StructureOrService", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Dsi.StoreManagement.StructuresOrServices.StructureOrService", "Source")
+                        .WithMany()
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Destination");
+
+                    b.Navigation("Owner");
+
+                    b.Navigation("Source");
+                });
+
             modelBuilder.Entity("Dsi.StoreManagement.Operations.Operation", b =>
                 {
                     b.HasOne("Dsi.StoreManagement.Documents.Document", "Document")
@@ -2475,35 +2594,42 @@ namespace Dsi.StoreManagement.Migrations
 
             modelBuilder.Entity("Dsi.StoreManagement.Products.Product", b =>
                 {
+                    b.HasOne("Dsi.StoreManagement.StructuresOrServices.StructureOrService", "ActualPosition")
+                        .WithMany("ProductList")
+                        .HasForeignKey("ActualPositionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Dsi.StoreManagement.Categories.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Dsi.StoreManagement.Colors.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Dsi.StoreManagement.Marques.Marque", "Marque")
                         .WithMany()
                         .HasForeignKey("MarqueId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Dsi.StoreManagement.Models.Model", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Dsi.StoreManagement.StructuresOrServices.StructureOrService", "OldPosition")
+                        .WithMany()
+                        .HasForeignKey("OldPositionId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Dsi.StoreManagement.Units.Unit", "Unit")
                         .WithMany()
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("ActualPosition");
 
                     b.Navigation("Category");
 
@@ -2513,7 +2639,19 @@ namespace Dsi.StoreManagement.Migrations
 
                     b.Navigation("Model");
 
+                    b.Navigation("OldPosition");
+
                     b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("Dsi.StoreManagement.StructuresOrServices.StructureOrService", b =>
+                {
+                    b.HasOne("Dsi.StoreManagement.StructuresOrServices.StructureOrService", "ParentStructure")
+                        .WithMany()
+                        .HasForeignKey("ParentStructureId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("ParentStructure");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
@@ -2801,6 +2939,13 @@ namespace Dsi.StoreManagement.Migrations
             modelBuilder.Entity("Dsi.StoreManagement.Products.Product", b =>
                 {
                     b.Navigation("OperationList");
+                });
+
+            modelBuilder.Entity("Dsi.StoreManagement.StructuresOrServices.StructureOrService", b =>
+                {
+                    b.Navigation("DocumentList");
+
+                    b.Navigation("ProductList");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
