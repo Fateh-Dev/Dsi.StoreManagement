@@ -27,20 +27,5 @@ namespace Dsi.StoreManagement.Products
         {
 
         }
-        // protected override IQueryable<Product> CreateFilteredQuery(PagedAndSortedResultRequestDto input)
-        // {
-        //     return Repository.GetAllIncluding(p => p.Marque);
-        // }
-        // protected override Product GetEntityById(Guid id)
-        // {
-        //     var entity = Repository.GetAllIncluding(p => p.Marque).FirstOrDefault(p => p.Id == id);
-        //     if (entity == null)
-        //     {
-        //         throw new EntityNotFoundException(typeof(Product), id);
-        //     }
-
-        //     return entity;
-        // }  
-
     }
 }

@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using Dsi.StoreManagement.Documents;
 using Dsi.StoreManagement.EntityFrameworkCore;
+using Dsi.StoreManagement.Operations;
 using Dsi.StoreManagement.Products;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +36,19 @@ public class MyController : AbpControllerBase
                 .Include(e => e.Marque)
                 .Include(e => e.Model)
                 .Include(e => e.Unit)
+                .Where(s => s.Id == Id)
+                .FirstOrDefaultAsync();
+        if (ev == null)
+        {
+            return NotFound();
+        }
+        return Ok(ev);
+    }
+    [HttpGet("getDocumentById")]
+    public async Task<ActionResult<Document>> getDocumentItem(Guid Id)
+    {
+        var ev = await _context.Documents
+                .Include(e => e.ProductList)
                 .Where(s => s.Id == Id)
                 .FirstOrDefaultAsync();
         if (ev == null)
