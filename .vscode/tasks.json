@@ -36,6 +36,46 @@
                 "${workspaceFolder}/aspnet-core/src/Dsi.StoreManagement.HttpApi.Host/Dsi.StoreManagement.HttpApi.Host.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run-server",
+            "command": "dotnet",
+            "type": "process",
+            "options": {
+                "cwd": "${workspaceFolder}/aspnet-core/src/Dsi.StoreManagement.HttpApi.Host",
+                "env": {
+                    // "LetsEncryptPORT": 443
+                    "ENABLE_FAKE": "TRUE"
+                }
+            },
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/aspnet-core/src/Dsi.StoreManagement.HttpApi.Host/Dsi.StoreManagement.HttpApi.Host.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run-client",
+            "type": "shell",
+            "command": "npm start",
+            "options": {
+                "cwd": "${workspaceFolder}/angular"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "run-app",
+            "dependsOn": [
+                "run-client",
+                "run-server"
+            ],
+            "dependsOrder": "parallel"
         }
     ]
 }
